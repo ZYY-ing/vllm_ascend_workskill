@@ -24,3 +24,8 @@ description: 在 NVIDIA CUDA 环境，尤其 H200 容器中编译指定 vLLM 源
 依次验收编译退出0、扩展导入、源码位置、health/models及最终答案和usage；仅HTTP200或进度100%不等于模型回答完成。长JIT根据编译活动与日志判断，不凭单条等待警告重启。
 
 权重下载与完整校验可使用 `weight-download`；GPQA、Hallusion等评测与思考标记提取属于 `model-evaluation`。没有这些技能时按用户提供的等价工具完成，不为部署强制安装其他技能。
+
+## 注意
+如何确定此模型在vllm上支持的特性，以获取最优的性能结果
+
+https://recipes.vllm.ai/ 此网站收录了vllm支持模型的相关特性，在确定服务拉起脚本前，需要先进网站查询相关模型的特性，以获取最优性能结果
