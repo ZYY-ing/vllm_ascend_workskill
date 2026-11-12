@@ -11,6 +11,7 @@ import tempfile
 import threading
 import time
 import types
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from prepare_evaluation import adapt_utils
 from prepare_concurrent_judge import adapt_concurrent_utils, adapt_evaluation
 

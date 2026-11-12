@@ -69,7 +69,7 @@ docker exec -it model-node0 bash
 
 ## 挂载与下载的常见陷阱
 
-HF权重下载、磁盘容量核对、Windows认证代理及多SSH隧道测速见[权重下载与加速](weight-download.md)。已有普通代理可用时直接复用，不默认部署额外转发服务。
+HF权重下载、磁盘容量核对、Windows认证代理及多SSH隧道测速见[权重下载与加速](https://github.com/ZYY-ing/vllm_ascend_workskill/blob/main/skills/weight-download/references/weight-download.md)。已有普通代理可用时直接复用，不默认部署额外转发服务。
 
 - 单文件bind mount前用test -f确认宿主源为文件。传统-v在源不存在时可能造出同名目录；需要让缺失源明确报错时可用--mount type=bind。容器内读取异常先核对源/目标类型及docker inspect，不先改应用代码。
 - 直接bind某个文件时，宿主通过rename/某些编辑器的原子替换产生新inode，运行中容器可能仍看到旧文件。核对宿主/容器文件内容、挂载和inode；不能笼统认定所有cp都更换inode。正确修复可选择维护窗口内重建挂载或受控原位写入；后者需避免应用读到半写内容，也不保证应用自动reload。

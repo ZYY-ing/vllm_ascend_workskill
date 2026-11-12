@@ -6,7 +6,7 @@
 
 权重尚未准备时按对应模型页的正常下载方式及授权获取，记录实际落盘目录；不将代码仓库clone命令当作模型下载，也不移动其他人的checkpoint。多节点分别验证模型可见性和元数据一致。
 
-多模态服务还须核对视觉编码器、连接/投影层及processor是否完整；删除language-model-only并设置image限额不会补出缺失权重。详见[多模态检查](multimodal.md#服务与权重)。
+多模态服务还须核对视觉编码器、连接/投影层及processor是否完整；删除language-model-only并设置image限额不会补出缺失权重。详见[多模态检查](https://github.com/ZYY-ing/vllm_ascend_workskill/blob/main/skills/model-evaluation/references/multimodal.md#服务与权重)。
 
 ## 单机短脚本
 

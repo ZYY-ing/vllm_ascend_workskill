@@ -10,7 +10,7 @@ import tempfile
 import threading
 import time
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parents[1] / "scripts"
 
 
 def exercise(concurrency, fail=False, limit=0):
@@ -140,5 +140,6 @@ def exercise(concurrency, fail=False, limit=0):
 if __name__ == '__main__':
     results = [exercise(1), exercise(4), exercise(4, fail=True), exercise(4, limit=5), exercise(4, limit=20)]
     report = dict(scope='localhost mock HTTP only; no real model performance/accuracy claim', cases=results)
-    (HERE/'verification_results.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
+    if len(sys.argv) > 1:
+        Path(sys.argv[1]).write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
     print(json.dumps(report, indent=2))

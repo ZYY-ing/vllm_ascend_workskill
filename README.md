@@ -1,96 +1,77 @@
-# vllmascend_workskill
+# vLLM 部署与评测 Skills
 
-用于 AI agent 的 vLLM Ascend 部署、测试和排障技能仓库。覆盖服务器连接、Docker、配套源码安装、权重下载、单机与多机服务、AISBench 精度与性能、多模态评测及 profiling，并提供 NVIDIA H200/CUDA 源码编译参考。
+用于 AI agent 的 vLLM 部署、权重下载、评测和排障技能集合。Ascend 与 NVIDIA CUDA 分开选择，下载和评测可独立使用。仓库提供流程、示例及辅助工具，不包含 vLLM 引擎源码、模型权重、个人服务器配置或实验结果。
 
-仓库包含 **一个主 skill：`vllm-ascend-ops`**。`references/` 是按阶段读取的操作文档，`scripts/` 是辅助工具；它们共同构成完整技能，不是互相独立的 skill。仓库不包含 vLLM 引擎源码、模型权重或某次实验的私有环境配置。
+## 选择技能
 
-## 技能入口与关键引用
+| Skill | 适用任务 | 入口 |
+|---|---|---|
+| `vllm-ascend-ops` | Ascend容器、配套源码、单机/多机服务、NPU/HCCL诊断和profiling | [SKILL.md](skills/vllm-ascend-ops/SKILL.md) |
+| `vllm-cuda-ops` | NVIDIA H200/CUDA源码编译、依赖与JIT排障、服务和curl | [SKILL.md](skills/vllm-cuda-ops/SKILL.md) |
+| `weight-download` | HF权重下载、代理与多隧道测速、断点续传和checksum验收 | [SKILL.md](skills/weight-download/SKILL.md) |
+| `model-evaluation` | AISBench、定长性能、HallusionBench、OCRBench V2及答案提取复核 | [SKILL.md](skills/model-evaluation/SKILL.md) |
 
-agent 从 [vllm-ascend-ops/SKILL.md](vllm-ascend-ops/SKILL.md) 开始，按当前任务读取参考资料。人工学习可先阅读 [技能目录说明](vllm-ascend-ops/README.md)。
+只加载本轮任务需要的技能。一次任务可依次使用多个技能，不要求把所有文档全部读入。综合任务的阶段衔接和原有操作约定见[完整工作流](docs/workflow.md)。
 
-| 工作内容 | 关键文档 |
-|---|---|
-| 主 skill、执行原则与验收口径 | [SKILL.md](vllm-ascend-ops/SKILL.md) |
-| 服务器、容器、模型和测试信息填写 | [环境配置示例](vllm-ascend-ops/environment.example.md) |
-| SSH、代理、Docker 和挂载 | [连接与容器](vllm-ascend-ops/references/connect-container.md) |
-| HF 权重下载、代理加速、断点续传与校验 | [权重下载](vllm-ascend-ops/references/weight-download.md) |
-| Ascend 配套源码与安装验证 | [源码安装](vllm-ascend-ops/references/build.md) |
-| NVIDIA H200/CUDA 编译、镜像、启动与 curl | [H200 学习文档](vllm-ascend-ops/references/h200-source-build.md) |
-| 单机、多机服务参数与进程管理 | [服务部署](vllm-ascend-ops/references/serve.md) |
-| AISBench 精度、性能及结果验收 | [AISBench](vllm-ascend-ops/references/aisbench.md) |
-| 精确输入长度、固定输出与前缀缓存条件 | [测试数据](vllm-ascend-ops/references/datasets.md) |
-| HallusionBench、OCRBench V2 与评分适配 | [多模态测试](vllm-ascend-ops/references/multimodal.md) |
-| Hallusion 并发、通用 API 裁判与缓存恢复 | [并发和 API 评分](vllm-ascend-ops/references/hallusion-concurrency-api.md) |
-| NPU 编号、归属与跨机通信诊断 | [硬件和网络](vllm-ascend-ops/references/hardware-network.md) |
-| Profiling 采集与 trace 分析 | [采集流程](vllm-ascend-ops/references/profiling.md)、[分析方法](vllm-ascend-ops/references/profiling-analysis.md) |
-| 连接、安装、加载和推理问题 | [排障表](vllm-ascend-ops/references/troubleshooting.md) |
-
-## 如何使用
-
-先获取仓库：
+## 使用
 
 ```bash
-git clone https://github.com/ZYY-ing/vllmascend_workskill.git
-cd vllmascend_workskill
+git clone https://github.com/ZYY-ing/vllm_ascend_workskill.git
+cd vllm_ascend_workskill
 ```
 
-将整个 `vllm-ascend-ops/` 目录交给具备终端、SSH 和文件读取能力的 agent，要求先读 `SKILL.md`。支持本地 skill 目录的工具可以安装整个技能目录；其他工具也可以直接按文档执行，不需要专用连接器。
+将选定的整个 `skills/<name>/` 目录交给 agent，先读其中的 `SKILL.md`；支持本地技能的工具也可安装整个目录。每个技能的运行工具和参考文档随技能一起分发，不需要安装 Blue 或同步到固定全局目录。
 
-复制环境模板后填写实际环境，保留在本地：
+部署环境可从[模板](skills/vllm-ascend-ops/assets/environment.example.md)填写本地 `environment.local.md`，也可直接在会话中提供。认证使用已有 SSH 配置或私有环境变量，不保存到仓库。使用与交付注意事项见[使用说明](docs/usage.md)。
 
-```bash
-cp vllm-ascend-ops/environment.example.md \
-   vllm-ascend-ops/environment.local.md
-```
+示例：
 
-环境资料说明 SSH 配置位置、硬件、容器、源码、权重、设备、端口和本轮测试目标。凭据使用已有 SSH 登录或私有环境变量，不写入文档。也可以在会话中提供环境资料，无需创建本地配置文件。
+> 使用 weight-download 检查模型仓库和目标磁盘，按指定 revision 下载并完整校验；不要启动服务。
 
-示例任务：
+> 使用 vllm-ascend-ops 按指定模型和硬件核对配方、启动服务并验证 curl；通过后使用 model-evaluation 执行指定样本数、输入输出长度、并发与缓存条件的测试。
 
-> 阅读 vllm-ascend-ops/SKILL.md 和我的本地环境资料。先只读检查服务器、容器、源码版本、权重完整性和设备占用，再按该模型的官方配方部署服务。服务健康和 curl 请求通过后，使用 AISBench 执行我指定的输入输出长度、样本数和并发，保存实际参数、原始日志及结果。
+## 主要学习入口
 
-只要求下载、排障或启动时，执行对应阶段即可，不自动扩展为整套评测。NVIDIA 环境先读 H200 文档，不直接套用 Ascend 的设备、通信和量化参数。
+- [HF权重下载与提速](skills/weight-download/references/weight-download.md)
+- [Ascend源码安装](skills/vllm-ascend-ops/references/build.md)与[服务部署](skills/vllm-ascend-ops/references/serve.md)
+- [H200编译、镜像、服务与curl](skills/vllm-cuda-ops/references/h200-source-build.md)
+- [AISBench精度性能](skills/model-evaluation/references/aisbench.md)与[定长数据及前缀缓存](skills/model-evaluation/references/datasets.md)
+- [HallusionBench并发测试和独立裁判](skills/model-evaluation/references/hallusion-concurrency-api.md)
+- [Hallusion数据、请求和指标解释](skills/model-evaluation/references/hallusionbench.md)
+- [OCRBench V2](skills/model-evaluation/references/ocrbench-v2.md)、[输出预算和采样](skills/model-evaluation/references/generation-settings.md)、[思考模型答案提取](skills/model-evaluation/references/answer-extraction.md)
+- [Profiling采集](skills/vllm-ascend-ops/references/profiling.md)与[分析](skills/vllm-ascend-ops/references/profiling-analysis.md)
 
-## 仓库代码结构
+## 仓库结构
 
 ```text
-vllmascend_workskill/
-├── README.md                         # 仓库入口和文档索引
-└── vllm-ascend-ops/
-    ├── SKILL.md                      # 主 skill 指令和阶段导航
-    ├── README.md                     # 技能使用说明、文件说明和来源
-    ├── environment.example.md        # 可公开的环境模板
-    ├── .gitignore                    # 忽略本地环境、密钥、日志和数据
-    ├── agents/
-    │   └── openai.yaml               # skill 展示名称和简介
-    ├── references/                   # 部署、测试和排障参考文档
-    └── scripts/                      # 下载、数据构造、推理和评分辅助脚本
+README.md                   仓库入口与技能选择
+CONTRIBUTING.md              新增技能、去重、检查及发布规则
+SOURCES.md                   官方文档、Blue及Hallusion参考来源
+.gitignore                  本地环境、凭据和运行产物忽略规则
+docs/
+  usage.md                  技能使用、分发和环境信息约定
+  workflow.md               从部署到测试的完整流程和交付要求
+  routing-acceptance.md      真实任务的技能选择验收用例
+  migration-map.json        原35个文件的哈希与迁移位置
+skills/
+  vllm-ascend-ops/           SKILL.md、agents、assets、references
+  vllm-cuda-ops/             SKILL.md、references
+  weight-download/           SKILL.md、references、scripts
+  model-evaluation/          SKILL.md、references、scripts、tests
+tools/
+  check_repository.py       结构、文档链接、语法、敏感信息与迁移完整性检查
 ```
 
-脚本按用途划分如下，参数和使用前提见对应参考文档及脚本帮助：
+`SKILL.md` 负责选择和执行导航，`references/` 负责详细命令，`scripts/` 负责可重复运行的工具，`tests/` 负责离线行为验证，`assets/` 负责可复制的模板。脚本具体参数见相应文档和帮助，不在多个 README 重复维护。
 
-| 用途 | 脚本 |
-|---|---|
-| 固定 HF revision、文件清单与 checksum 验收 | `hf_weight_manifest.py` |
-| Windows 当前用户认证代理转发、服务器多隧道连接分配 | `windows_sspi_proxy.ps1`、`tcp_proxy_pool.py` |
-| 精确 token 输入、公共前缀数据与缓存指标 | `make_chat_data.py`、`cache_delta.py` |
-| Hallusion 图片获取与模型推理 | `download_hallusion_images.sh`、`run_hallusionbench_hy4.py` |
-| 评测前检查与原始结果核对 | `preflight.py`、`check_results.py` |
-| 裁判 API 适配、并发与结果汇总 | `prepare_evaluation.py`、`prepare_concurrent_judge.py`、`judge_concurrency.py`、`run_judge_api.sh`、`summarize_hallusion_scores.py` |
-| 推理和裁判并发行为验证 | `verify_concurrency.py`、`verify_judge_concurrency.py` |
+## 修改与检查
 
-辅助脚本不是通用模型启动器。服务脚本和框架配置按本轮模型、硬件、代码版本及用户要求生成；不能只换模型路径就承诺支持任意模型。
+新增能力先读 [CONTRIBUTING.md](CONTRIBUTING.md)。保留原始模型和源码，测试记录实际版本、请求、token、失败、截断与评分口径；真实环境和输出放在本地项目，不写回技能。
 
-## 使用与结果约定
+本次目录迁移的内容保留方式和行为变化见[迁移说明](docs/migration.md)；逐个原文件的对应关系见[迁移清单](docs/migration-map.json)。
 
-- 保留原始模型和源码，修改前核对目标；停止服务先确认所属容器、命令及启动时间。
-- 分别验收容器可用、代码可导入、服务健康、真实请求成功和指定测试通过。
-- 性能报告真实 token 数、吞吐、TTFT/TPOT、并发和缓存条件；精度报告全量范围、失败、截断及评分提取规则。
-- 思考模型核对实际 tokenizer 的标记和 API 返回字段，避免从推理过程误取最终答案。
-- 仓库只保存可公开的流程、示例和工具；本地环境、认证文件、私有日志、权重及数据集留在运行环境。
+```bash
+python tools/check_repository.py
+```
 
-## 参考来源
-
-部署和评测流程参考 [vLLM Ascend 官方文档](https://docs.vllm.ai/projects/ascend/zh-cn/latest/)、[vLLM GPU 安装说明](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/)及各模型、评测框架的版本说明。执行时核对实际分支、镜像和依赖，不把不同版本的参数混用。
-
-环境信息复用、PID 归属、容器挂载和诊断经验参考 [Blue Server Toolkit](https://github.com/xuchi-0808/blue-server-toolkit)。本 skill 独立组织流程，不依赖安装该工具；已有 Blue 配置仅作为可选、只读的环境信息来源。具体保留原则见[技能目录说明](vllm-ascend-ops/README.md#融合来源与保留原则)。
+Python为3.10及以上；能找到 Bash 时同时检查 Shell 语法，也可用 `--bash /path/to/bash` 指定。离线测试命令见贡献说明，不调用真实收费API，不代表模型精度或性能成绩。参考来源及内容归属见 [SOURCES.md](SOURCES.md)。

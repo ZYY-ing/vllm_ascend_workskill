@@ -1,0 +1,265 @@
+{
+  "source_commit": "1b1efd0b8fcc661c6e9a2d2940535f3db4031955",
+  "purpose": "逐个记录原35个文件的迁移位置；README索引合并，详细独有内容保留。",
+  "files": [
+    {
+      "old": "README.md",
+      "sha256": "2a64deb2d6b24836a69331bca747c4128eb6164acd84a019546da9010a762f74",
+      "destinations": [
+        "README.md",
+        "docs/usage.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/.gitignore",
+      "sha256": "33934b1307f44d00b6f66fa46bf7c4a22ed5191e47a3a56887ace5cc5b0de3bb",
+      "destinations": [
+        ".gitignore"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/README.md",
+      "sha256": "5d755f5521c32d564c5d33736cb0477054aec1dc4b5272cc8ac490706ff6a0dc",
+      "destinations": [
+        "docs/usage.md",
+        "SOURCES.md",
+        "README.md",
+        "docs/migration-map.json"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/SKILL.md",
+      "sha256": "0170fbb93f736d94066db019258dd26ace7a6fc61f1c5d9a0c4a0aa20a07759b",
+      "destinations": [
+        "docs/workflow.md",
+        "skills/vllm-ascend-ops/SKILL.md",
+        "skills/vllm-cuda-ops/SKILL.md",
+        "skills/weight-download/SKILL.md",
+        "skills/model-evaluation/SKILL.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/agents/openai.yaml",
+      "sha256": "e62702bee6dbe58c6eba41c4f1a7c81df2b52d99b86826e06771d8385f250006",
+      "destinations": [
+        "skills/vllm-ascend-ops/agents/openai.yaml"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/environment.example.md",
+      "sha256": "b13588bbe1886de3149604629d776501c2e1de850222ebb33893d1c432c078a3",
+      "destinations": [
+        "skills/vllm-ascend-ops/assets/environment.example.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/aisbench.md",
+      "sha256": "89ef42ac224f4057f7eebae05408fa061c531e83e98bd2e3657d88a14fc304bd",
+      "destinations": [
+        "skills/model-evaluation/references/aisbench.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/build.md",
+      "sha256": "2238ced2b4067aa488549a862b4fd69274e84d9d4985b481cb9b746be486fcdf",
+      "destinations": [
+        "skills/vllm-ascend-ops/references/build.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/connect-container.md",
+      "sha256": "909ee1d1d1d3f5921f150f1610d34e47868ab3b09f11ed742121747add2acde7",
+      "destinations": [
+        "skills/vllm-ascend-ops/references/connect-container.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/datasets.md",
+      "sha256": "c6ee173a777c02ca383c44edaed5ff1bbdaf7f9d38ebbf089ec3cde0865b38a3",
+      "destinations": [
+        "skills/model-evaluation/references/datasets.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/h200-source-build.md",
+      "sha256": "f92da70822b74c8a1d9dc8e304764f69d8d2928976fd2bb869a293ff4020566a",
+      "destinations": [
+        "skills/vllm-cuda-ops/references/h200-source-build.md",
+        "skills/model-evaluation/references/answer-extraction.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/hallusion-concurrency-api.md",
+      "sha256": "7ec8187dfab4357963bc2ca0d303c07b1f6d6a36a6d76a81ff7dee88e804fc5b",
+      "destinations": [
+        "skills/model-evaluation/references/hallusion-concurrency-api.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/hardware-network.md",
+      "sha256": "d31bab8b95d20ae6e529dbf0d516ac97f5e3a2669473ba65efd11ed1b127acc6",
+      "destinations": [
+        "skills/vllm-ascend-ops/references/hardware-network.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/multimodal.md",
+      "sha256": "664b7dde344ddc7b7e14ea5f1f930a97a4fc3bbbd84f953ab7ec42b3335ccbdc",
+      "destinations": [
+        "skills/model-evaluation/references/multimodal.md",
+        "skills/model-evaluation/references/hallusionbench.md",
+        "skills/model-evaluation/references/ocrbench-v2.md",
+        "skills/model-evaluation/references/generation-settings.md",
+        "SOURCES.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/profiling-analysis.md",
+      "sha256": "efbc62656643f3abd5c2124a7047ab9c2fa65f7eb4805cf05ef7f869206d93d3",
+      "destinations": [
+        "skills/vllm-ascend-ops/references/profiling-analysis.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/profiling.md",
+      "sha256": "50e372da9705c3e26e048885272bb6342b6dec89d2d2777153a6456ad271c183",
+      "destinations": [
+        "skills/vllm-ascend-ops/references/profiling.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/serve.md",
+      "sha256": "8d80ad10ed19a1b44e31df6ac98839d91fb307bb693451be70f219230019604b",
+      "destinations": [
+        "skills/vllm-ascend-ops/references/serve.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/troubleshooting.md",
+      "sha256": "7eddab3ed9573754127b4b97ee969ce046e3e40dc7ee53fdb895f7a249cc2b70",
+      "destinations": [
+        "skills/vllm-ascend-ops/references/troubleshooting.md",
+        "skills/model-evaluation/references/troubleshooting.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/references/weight-download.md",
+      "sha256": "809fd51c2b4021d6a9f78c9098ef944675fd513cc44fc3c94ba7707c790730d7",
+      "destinations": [
+        "skills/weight-download/references/weight-download.md"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/cache_delta.py",
+      "sha256": "787888cc8ab7d350693a582b4d45032dde2fe3861ec356c4182bbddbad2d2dca",
+      "destinations": [
+        "skills/model-evaluation/scripts/cache_delta.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/check_results.py",
+      "sha256": "fbef8174fff6701d34256d8795aae12d3adc77e596fb7501f3c5b9cc46c58928",
+      "destinations": [
+        "skills/model-evaluation/scripts/check_results.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/download_hallusion_images.sh",
+      "sha256": "b0da4bb9a23b6482f8b2de813349d708e7c64fe39034c1c975553740fd74ae7b",
+      "destinations": [
+        "skills/model-evaluation/scripts/download_hallusion_images.sh"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/hf_weight_manifest.py",
+      "sha256": "d2b50bdf7b5ec06505d691e80fc9dc4aa4730c33db654f754cbe5233706ba227",
+      "destinations": [
+        "skills/weight-download/scripts/hf_weight_manifest.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/judge_concurrency.py",
+      "sha256": "c3ee8c67d79ad5ce9ce554d983cf180b7495fc9f7b83704852a5b240e9fcc5e8",
+      "destinations": [
+        "skills/model-evaluation/scripts/judge_concurrency.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/make_chat_data.py",
+      "sha256": "60848942d39e7889aad5323e951d85c0485878c42adead51b7d58a1ed1275ab6",
+      "destinations": [
+        "skills/model-evaluation/scripts/make_chat_data.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/preflight.py",
+      "sha256": "2b486a112b30242ce20bc2521024e86494ef4b9ce63af3c8d4ae6e21564168a9",
+      "destinations": [
+        "skills/model-evaluation/scripts/preflight.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/prepare_concurrent_judge.py",
+      "sha256": "fcb2abaa90b8e393620c1d976bf78c23ecd612c6bfee311c664d65e91ff504e9",
+      "destinations": [
+        "skills/model-evaluation/scripts/prepare_concurrent_judge.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/prepare_evaluation.py",
+      "sha256": "e833cdcbdfccdf75a3fa6ba96f05a013feabae03451dffe804f77bcd6b87ed44",
+      "destinations": [
+        "skills/model-evaluation/scripts/prepare_evaluation.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/run_hallusionbench_hy4.py",
+      "sha256": "4777593112ca7395ecd2feb5cdd1fba82da840e386e59b43f1b1579e23772ec2",
+      "destinations": [
+        "skills/model-evaluation/scripts/run_hallusionbench_hy4.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/run_judge_api.sh",
+      "sha256": "0fee63096052df6dcda57a9c97c4820716ef0ae400cd5c1781f991c20a1a2e06",
+      "destinations": [
+        "skills/model-evaluation/scripts/run_judge_api.sh"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/summarize_hallusion_scores.py",
+      "sha256": "51ae477385bc0714ca381a28408c10922bf2096492c1b9bbfc51ef839ace3c6d",
+      "destinations": [
+        "skills/model-evaluation/scripts/summarize_hallusion_scores.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/tcp_proxy_pool.py",
+      "sha256": "70dfb31224ba089bdf98dc7d94d1b210bd18fdd468a4bc013912ac84b5462d33",
+      "destinations": [
+        "skills/weight-download/scripts/tcp_proxy_pool.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/verify_concurrency.py",
+      "sha256": "51aa669c962c73d4132344c99041f6a6f6d4b43fc30053325ba87d5f9e3fb231",
+      "destinations": [
+        "skills/model-evaluation/tests/verify_concurrency.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/verify_judge_concurrency.py",
+      "sha256": "5f5b1831cf897a891465ac2a84e8b5c02a02598c8160aa89ce52d8f8fb707266",
+      "destinations": [
+        "skills/model-evaluation/tests/verify_judge_concurrency.py"
+      ]
+    },
+    {
+      "old": "vllm-ascend-ops/scripts/windows_sspi_proxy.ps1",
+      "sha256": "66699ad93f489b2dc080d446c521314ab1b673a2b0ddc1067df56ea43f8c3d3f",
+      "destinations": [
+        "skills/weight-download/scripts/windows_sspi_proxy.ps1"
+      ]
+    }
+  ]
+}

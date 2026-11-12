@@ -1,3 +1,0 @@
-interface:
-  display_name: "vLLM Ascend 部署与测试"
-  short_description: "连接昇腾服务器，精简完成容器、源码编译、模型部署、AISBench与Profiling"
